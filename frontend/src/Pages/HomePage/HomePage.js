@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../../Services/api.js';
 import { Link } from 'react-router-dom';  // Adicione esta linha no topo do seu arquivo
-
+import './HomePage.css'; // Importando o arquivo de estilo
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);

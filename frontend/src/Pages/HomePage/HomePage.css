@@ -1,0 +1,98 @@
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+/* Reseta margens e paddings */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #114c7d;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Navegação */
+nav {
+    background-color: #38c8a8;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    font-weight: 500;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #f9f9f9;
+}
+
+/* Lista de produtos */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li a {
+    color: #114c7d;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+li a:hover {
+    color: #38c8a8;
+}
+
+/* Botão e links */
+button, a {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover, a:hover {
+    background-color: #e12d4f;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    nav a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
