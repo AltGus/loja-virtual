@@ -1,0 +1,52 @@
+/* src/components/Footer/Footer.css */
+
+/* Garantir que o corpo da página ocupe toda a altura da tela */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Corpo da página, flexível para ocupar toda a altura */
+  .main_body_content {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px; /* Garante que o conteúdo não fique coberto pelo footer */
+  }
+  
+  /* Estilo básico do rodapé */
+  .footer_section {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Estilo do texto */
+  .footer_section p {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilo para o ano no rodapé */
+  #displayYear {
+    font-weight: bold;
+    color: #ff6f61; /* Cor de destaque */
+  }
+  
+  /* Responsividade para o rodapé */
+  @media (max-width: 768px) {
+    .footer_section {
+      padding: 15px 0;
+    }
+  
+    .footer_section p {
+      font-size: 12px;
+    }
+  }
+  

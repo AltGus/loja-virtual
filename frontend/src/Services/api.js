@@ -1,8 +1,6 @@
-// src/Services/api.js
-
 // Importando as funcionalidades do Firebase
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, getDoc, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, getDoc, addDoc, updateDoc, doc, deleteDoc, query, where } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 // Configuração do Firebase
@@ -86,6 +84,19 @@ export const fetchProducts = async () => {
   }
 };
 
+// Buscar produtos por categoria
+export const fetchProductsByCategory = async (category) => {
+  try {
+    const q = query(collection(db, 'products'), where('category', '==', category)); // Busca por categoria
+    const querySnapshot = await getDocs(q);
+    const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return products;
+  } catch (error) {
+    console.error('Erro ao buscar produtos por categoria:', error.message);
+    throw error;
+  }
+};
+
 // Buscar um produto específico pelo ID
 export const fetchProductById = async (productId) => {
   try {
@@ -122,6 +133,58 @@ export const deleteProduct = async (productId) => {
     console.error('Erro ao excluir produto:', error.message);
     throw error;
   }
+};
+
+//
+// Funções de Favoritos
+//
+
+// Buscar os favoritos de um usuário
+export const fetchFavorites = async (token) => {
+  try {
+    const userId = getUserIdFromToken(token); // Função para extrair o ID do usuário do token
+    const favoritesRef = collection(db, 'favorites', userId, 'products'); // Referência aos favoritos do usuário
+    const querySnapshot = await getDocs(favoritesRef);
+    const favorites = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return favorites;
+  } catch (error) {
+    console.error('Erro ao buscar favoritos:', error.message);
+    throw error;
+  }
+};
+
+// Adicionar um produto aos favoritos de um usuário
+export const addFavorite = async (productId, token) => {
+  try {
+    const userId = getUserIdFromToken(token); // Função para extrair o ID do usuário do token
+    const productRef = doc(db, 'products', productId); // Referência ao produto
+    await addDoc(collection(db, 'favorites', userId, 'products'), { productId, productRef });
+    return { productId }; // Retorna o produto favoritado
+  } catch (error) {
+    console.error('Erro ao adicionar favorito:', error.message);
+    throw error;
+  }
+};
+
+// Remover um produto dos favoritos de um usuário
+export const removeFavorite = async (productId, token) => {
+  try {
+    const userId = getUserIdFromToken(token); // Função para extrair o ID do usuário do token
+    const favoriteRef = doc(db, 'favorites', userId, 'products', productId); // Referência ao favorito
+    await deleteDoc(favoriteRef); // Exclui o produto dos favoritos
+  } catch (error) {
+    console.error('Erro ao remover favorito:', error.message);
+    throw error;
+  }
+};
+
+// Função auxiliar para obter o ID do usuário a partir do token
+const getUserIdFromToken = (token) => {
+  // A implementação desta função depende de como você estrutura o token. 
+  // Suponha que você possa extrair o ID do usuário do token JWT.
+  // Se estiver usando Firebase Authentication, você pode obter o ID do usuário com:
+  const user = auth.currentUser;
+  return user ? user.uid : null; // Retorna o ID do usuário ou null caso o usuário não esteja autenticado
 };
 
 // Exportação dos serviços de autenticação e banco de dados

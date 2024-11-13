@@ -1,0 +1,67 @@
+/* Estilos da Navbar */
+.navbar {
+    background-color: #38c8a8;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo */
+.Brand-Logo {
+    width: 50px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    margin-right: 15px;
+}
+
+/* Links de navegação */
+.navbar-link {
+    color: #fff;
+    font-weight: 500;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.navbar-link:hover {
+    color: #f9f9f9;
+}
+
+/* Barra de busca */
+.nav-items {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.search-box input[type="text"] {
+    border: none;
+    padding: 5px;
+    outline: none;
+    width: 200px; /* Ajuste conforme necessário */
+}
+
+.search-box .search-btn {
+    background-color: #38c8a8;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+.search-box .search-btn:hover {
+    background-color: #2ea78c;
+}

@@ -1,0 +1,65 @@
+/* src/pages/AltEndereco.css */
+
+.alt-endereco-container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .alt-endereco-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .alt-endereco-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .alt-endereco-container .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .alt-endereco-container .form-group label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .alt-endereco-container .form-group input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .alt-endereco-container .form-group input:disabled {
+    background-color: #f0f0f0;
+  }
+  
+  .alt-endereco-container .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .alt-endereco-container button {
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; /* Botão azul */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .alt-endereco-container button:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+  }
+  

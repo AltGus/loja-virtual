@@ -1,0 +1,61 @@
+/* src/pages/LoginPage.css */
+
+/* Estilo da seção de login */
+.login_section {
+    padding: 50px 0;
+}
+
+/* Container do formulário de login */
+.form_container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Título da seção de login */
+.heading_container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Estilo dos campos de input */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Estilo do botão de login */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo do botão de logout */
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    background-color: #dc3545; /* Cor vermelha para o botão de logout */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #c82333; /* Cor vermelha escura ao passar o mouse */
+}

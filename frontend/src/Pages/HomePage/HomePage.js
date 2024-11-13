@@ -1,46 +1,42 @@
-// src/Pages/HomePage/HomePage.js
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../../Services/api.js';
-import { Link } from 'react-router-dom';  // Adicione esta linha no topo do seu arquivo
-import './HomePage.css'; // Importando o arquivo de estilo
+import { fetchProductsByCategory } from '../../Services/api.js'; // Importando as funções de API
+import './HomePage.css';
+import ProductCard from '../../Components/ProductCard/ProductCard';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('electronics'); // Categoria selecionada
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const data = await fetchProducts();
+        const data = await fetchProductsByCategory(selectedCategory); // Buscando produtos pela categoria
         setProducts(data);
       } catch (error) {
         console.error('Erro ao carregar produtos:', error);
       }
     };
     loadProducts();
-  }, []);
+  }, [selectedCategory]); // Recarregar produtos sempre que a categoria mudar
 
   return (
-    <div>
-      <h1>Lista de Produtos</h1>
-
-      {/* Navegação adicional */}
-      <nav>
-        <Link to="/cart">Carrinho</Link> | 
-        <Link to="/login">Login</Link> | 
-        <Link to="/favorites">Favoritos</Link> | 
-        <Link to="/profile">Perfil</Link>
-      </nav>
+    <div className="homepage-container">
+      {/* Hero Section - Título e boas-vindas */}
+      <div className="hero-section">
+        <h1>RPG Store</h1>
+        <p>Bem-vindo à loja de produtos exclusivos para RPGs!</p>
+      </div>
 
       {/* Listagem dos produtos */}
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <Link to={`/product/${product.id}`}> {/* Link para a página do produto */}
-              {product.name} - R$ {product.price.toFixed(2)}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="product-list">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p>Carregando produtos...</p>
+        )}
+      </div>
     </div>
   );
 };

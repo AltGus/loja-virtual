@@ -1,7 +1,8 @@
-// src/Pages/ProductPage/ProductPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '../../Services/api.js'; // Importando a função correta para buscar o produto pelo ID
+import { fetchProductById } from '../../Services/api.js'; // Função para buscar o produto
+import ProductCard from '../../Components/ProductCard/ProductCard'; // Importando o ProductCard
+import './ProductPage.css'; // Importando o CSS da página de produto
 
 const ProductPage = () => {
   const { id } = useParams();  // Pegando o 'id' do produto da URL
@@ -27,25 +28,19 @@ const ProductPage = () => {
 
   // Exibição enquanto carrega
   if (loading) {
-    return <p>Carregando...</p>;
+    return <p className="loading">Carregando...</p>;
   }
 
   // Exibição de erro, caso haja algum
   if (error) {
-    return <p>{error}</p>;
+    return <p className="error">{error}</p>;
   }
 
-  // Exibição do produto
+  // Exibição do produto usando o ProductCard
   return (
     <div className="product-page">
       {product ? (
-        <div className="product-details">
-          <h2>{product.name}</h2>
-          <img src={product.imageUrl} alt={product.name} />
-          <p>{product.description}</p>
-          <p><strong>Preço:</strong> R${product.price}</p>
-          <button>Add to Cart</button> {/* Aqui você pode adicionar lógica de carrinho */}
-        </div>
+        <ProductCard product={product} />  // Passando o produto como prop para o ProductCard
       ) : (
         <p>Produto não encontrado.</p>
       )}
