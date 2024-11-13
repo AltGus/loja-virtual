@@ -1,9 +1,10 @@
+// src/Components/SignupPage/SignupPage.js
 import React, { useState } from 'react';
-import { registerUser } from '../../Services/api.js';
-import './SignupPage.css'; // Certifique-se de ter o arquivo CSS para estilização
+import { auth } from '../../Services/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import './SignupPage.css';
 
 const SignupPage = () => {
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,9 +19,8 @@ const SignupPage = () => {
     }
 
     try {
-      await registerUser(email, password); // Função do Firebase
+      await createUserWithEmailAndPassword(auth, email, password);
       alert('Cadastro realizado com sucesso!');
-      // Redirecionar ou limpar o formulário, dependendo do seu fluxo
     } catch (error) {
       console.error('Erro ao cadastrar:', error.message);
       setError('Falha no cadastro. Tente novamente.');
@@ -29,62 +29,42 @@ const SignupPage = () => {
 
   return (
     <div>
-      {/* Signup Section */}
       <section className="signup_section layout_padding">
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-5 col-lg-4 offset-md-1 offset-lg-2">
               <div className="form_container">
-                <div className="heading_container">
-                  <h2>Cadastro</h2>
-                </div>
+                <h2>Cadastro</h2>
                 <form onSubmit={handleSignup}>
-                  <div className="form-group">
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      placeholder="Usuário" 
-                      value={username} 
-                      onChange={(e) => setUsername(e.target.value)} 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input 
-                      type="email" 
-                      className="form-control" 
-                      placeholder="Email" 
-                      value={email} 
-                      onChange={(e) => setEmail(e.target.value)} 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input 
-                      type="password" 
-                      className="form-control" 
-                      placeholder="Senha" 
-                      value={password} 
-                      onChange={(e) => setPassword(e.target.value)} 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input 
-                      type="password" 
-                      className="form-control" 
-                      placeholder="Confirmar Senha" 
-                      value={confirmPassword} 
-                      onChange={(e) => setConfirmPassword(e.target.value)} 
-                    />
-                  </div>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Confirmar Senha"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
                   {error && <div className="error-message">{error}</div>}
-                  <button className="btn btn-primary" type="submit">Cadastrar</button>
+                  <button type="submit" className="btn btn-primary">Cadastrar</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Footer Section */}
     </div>
   );
 };

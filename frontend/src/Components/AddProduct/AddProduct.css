@@ -1,0 +1,31 @@
+/* src/components/AddProductForm.css */
+.add-product-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .add-product-form input,
+  .add-product-form textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 1em;
+  }
+  
+  .add-product-form button {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-product-form button:hover {
+    background-color: #0056b3;
+  }
+  

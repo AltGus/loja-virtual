@@ -8,12 +8,13 @@ import SignupPage from '../Pages/SignupPage/SignupPage';
 import ProductPage from '../Pages/ProductPage/ProductPage';
 import MyFavorites from '../Pages/MyFavorites/MyFavorites';
 import PerfilPage from '../Pages/PerfilPage/PerfilPage';
-import AltEmail from '../Pages/ALT/AltEmail'; // Corrigido para o caminho correto
-import AltNumero from '../Pages/ALT/AltNumero'; // Corrigido para o caminho correto
-import AltEndereco from '../Pages/ALT/AltEndereco'; // Corrigido para o caminho correto
-import LogoutPage from '../Pages/Logout/LogoutPage'; // Corrigido para o caminho correto
+import AltEmail from '../Pages/ALT/AltEmail';
+import AltNumero from '../Pages/ALT/AltNumero';
+import AltEndereco from '../Pages/ALT/AltEndereco';
+import LogoutPage from '../Pages/Logout/LogoutPage';
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
+import AddProductForm from '../Components/AddProduct/AddProduct';  // Corrigido para importar o formulário
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,9 @@ const AppRoutes = () => {
         <Route path="/alt-numero" element={<AltNumero />} />
         <Route path="/alt-endereco" element={<AltEndereco />} />
         <Route path="/logout" element={<LogoutPage />} />
+        
+        {/* Nova rota para adicionar produtos */}
+        <Route path="/add-product" element={<AddProductForm />} />
       </Routes>
       <Footer />
     </Router>

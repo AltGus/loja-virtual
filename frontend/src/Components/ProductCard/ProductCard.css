@@ -1,86 +1,91 @@
-/* src/components/ProductCard.css */
-
 .product-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 300px;
-    margin: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .product-card__image {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-  }
-  
-  .product-card__image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  .product-card__content {
-    padding: 15px;
-  }
-  
-  .product-card__title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .product-card__price {
-    font-size: 16px;
-    color: #4CAF50;
-    margin-bottom: 10px;
-  }
-  
-  .product-card__description {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 15px;
-  }
-  
-  .product-card__actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .product-card__actions .btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .product-card__actions .add-to-cart {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .product-card__actions .add-to-cart:hover {
-    background-color: #45a049;
-  }
-  
-  .product-card__actions .view-details {
-    background-color: #2196F3;
-    color: white;
-  }
-  
-  .product-card__actions .view-details:hover {
-    background-color: #1976D2;
-  }
-  
+  background-color: #1a1a1a; /* Fundo escuro */
+  border: none; /* Remove bordas */
+  border-radius: 8px;
+  width: 200px; /* Largura consistente */
+  margin: 15px; /* Espaçamento entre os cards */
+  overflow: hidden;
+  color: #fff; /* Texto branco */
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Adiciona sombra no hover */
+}
+
+.product-card__image {
+  background-color: #252525; /* Fundo cinza-escuro */
+  height: 120px; /* Altura ajustada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px; /* Espaçamento interno */
+}
+
+.product-card__image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ajusta a imagem dentro do espaço */
+}
+
+.product-card__content {
+  padding: 10px; /* Ajuste no padding do conteúdo */
+}
+
+.product-card__title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px; /* Espaçamento inferior */
+  color: #e0e0e0; /* Texto claro */
+  height: 40px; /* Altura fixa para alinhar títulos */
+  overflow: hidden; /* Evita estouro de texto */
+  text-overflow: ellipsis;
+}
+
+.product-card__price {
+  font-size: 16px;
+  color: #4CAF50; /* Verde para preços */
+  margin-bottom: 8px;
+}
+
+.product-card__category {
+  font-size: 12px;
+  color: #ccc; /* Texto mais claro */
+  margin-bottom: 8px;
+}
+
+.product-card__description {
+  font-size: 6px; /* Tamanho pequeno para restringir caracteres visíveis */
+  color: #ccc;
+  margin-bottom: 8px;
+  line-height: 1; /* Altura de linha ajustada para menos espaçamento vertical */
+  max-height: 12px; /* Limita ainda mais a altura da descrição */
+  overflow: hidden; /* Esconde texto excedente */
+  text-overflow: ellipsis; /* Adiciona reticências no final */
+  white-space: nowrap; /* Força o texto a permanecer em uma única linha */
+}
+
+
+.product-card__actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espaçamento entre botões */
+  padding: 10px;
+}
+
+.product-card__actions .btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #4CAF50; /* Cor do botão principal */
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.product-card__actions .btn:hover {
+  background-color: #45a049;
+}

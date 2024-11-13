@@ -21,11 +21,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-//
 // Funções de Autenticação
-//
-
-// Registrar um novo usuário
 export const registerUser = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -36,7 +32,6 @@ export const registerUser = async (email, password) => {
   }
 };
 
-// Fazer login com email e senha
 export const loginUser = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -47,7 +42,6 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Fazer logout
 export const logoutUser = async () => {
   try {
     await signOut(auth);
@@ -57,9 +51,7 @@ export const logoutUser = async () => {
   }
 };
 
-//
 // Funções de CRUD com Firestore (produtos)
-//
 
 // Adicionar um novo produto
 export const addProduct = async (product) => {
@@ -87,7 +79,7 @@ export const fetchProducts = async () => {
 // Buscar produtos por categoria
 export const fetchProductsByCategory = async (category) => {
   try {
-    const q = query(collection(db, 'products'), where('category', '==', category)); // Busca por categoria
+    const q = query(collection(db, 'products'), where('category', '==', category));
     const querySnapshot = await getDocs(q);
     const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     return products;
@@ -135,15 +127,15 @@ export const deleteProduct = async (productId) => {
   }
 };
 
-//
 // Funções de Favoritos
-//
 
 // Buscar os favoritos de um usuário
-export const fetchFavorites = async (token) => {
+export const fetchFavorites = async () => {
   try {
-    const userId = getUserIdFromToken(token); // Função para extrair o ID do usuário do token
-    const favoritesRef = collection(db, 'favorites', userId, 'products'); // Referência aos favoritos do usuário
+    const userId = getCurrentUserId();
+    if (!userId) throw new Error('Usuário não autenticado');
+    
+    const favoritesRef = collection(db, 'favorites', userId, 'products');
     const querySnapshot = await getDocs(favoritesRef);
     const favorites = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     return favorites;
@@ -154,12 +146,14 @@ export const fetchFavorites = async (token) => {
 };
 
 // Adicionar um produto aos favoritos de um usuário
-export const addFavorite = async (productId, token) => {
+export const addFavorite = async (productId) => {
   try {
-    const userId = getUserIdFromToken(token); // Função para extrair o ID do usuário do token
-    const productRef = doc(db, 'products', productId); // Referência ao produto
+    const userId = getCurrentUserId();
+    if (!userId) throw new Error('Usuário não autenticado');
+    
+    const productRef = doc(db, 'products', productId);
     await addDoc(collection(db, 'favorites', userId, 'products'), { productId, productRef });
-    return { productId }; // Retorna o produto favoritado
+    return { productId };
   } catch (error) {
     console.error('Erro ao adicionar favorito:', error.message);
     throw error;
@@ -167,24 +161,23 @@ export const addFavorite = async (productId, token) => {
 };
 
 // Remover um produto dos favoritos de um usuário
-export const removeFavorite = async (productId, token) => {
+export const removeFavorite = async (productId) => {
   try {
-    const userId = getUserIdFromToken(token); // Função para extrair o ID do usuário do token
-    const favoriteRef = doc(db, 'favorites', userId, 'products', productId); // Referência ao favorito
-    await deleteDoc(favoriteRef); // Exclui o produto dos favoritos
+    const userId = getCurrentUserId();
+    if (!userId) throw new Error('Usuário não autenticado');
+    
+    const favoriteRef = doc(db, 'favorites', userId, 'products', productId);
+    await deleteDoc(favoriteRef);
   } catch (error) {
     console.error('Erro ao remover favorito:', error.message);
     throw error;
   }
 };
 
-// Função auxiliar para obter o ID do usuário a partir do token
-const getUserIdFromToken = (token) => {
-  // A implementação desta função depende de como você estrutura o token. 
-  // Suponha que você possa extrair o ID do usuário do token JWT.
-  // Se estiver usando Firebase Authentication, você pode obter o ID do usuário com:
+// Função auxiliar para obter o ID do usuário autenticado atual
+const getCurrentUserId = () => {
   const user = auth.currentUser;
-  return user ? user.uid : null; // Retorna o ID do usuário ou null caso o usuário não esteja autenticado
+  return user ? user.uid : null;
 };
 
 // Exportação dos serviços de autenticação e banco de dados
