@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../../Services/api'; // Função para buscar os produtos do Firebase
 import ProductCard from '../../Components/ProductCard/ProductCard'; // Componente de exibição dos produtos
-
 import './HomePage.css';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate(); // Hook para navegar entre rotas
 
   // Fetch dos produtos quando a página é carregada
   useEffect(() => {
@@ -19,7 +20,12 @@ const HomePage = () => {
     };
 
     loadProducts();
-  }, []); // O array vazio significa que será executado apenas uma vez quando o componente for montado
+  }, []); // Executado apenas uma vez quando o componente é montado
+
+  // Função para redirecionar para a página de adição de produto
+  const goToAddProduct = () => {
+    navigate('/add-product');
+  };
 
   return (
     <div className="home-page">
@@ -29,6 +35,13 @@ const HomePage = () => {
         <p>Encontre os melhores itens para suas aventuras de RPG!</p>
       </div>
 
+      {/* Botão para adicionar novo produto */}
+      <div className="add-product-button-container">
+        <button className="btn btn-primary" onClick={goToAddProduct}>
+          Adicionar Produto
+        </button>
+      </div>
+
       {/* Lista de Produtos */}
       <h2 className="section-title">Produtos Disponíveis</h2>
       <div className="product-list">
@@ -36,7 +49,7 @@ const HomePage = () => {
           <p>Sem produtos disponíveis no momento.</p>
         ) : (
           // Mapeia os produtos e exibe cada um deles
-          products.map(product => (
+          products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         )}
